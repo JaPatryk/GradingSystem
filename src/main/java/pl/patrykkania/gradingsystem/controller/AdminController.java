@@ -2,13 +2,11 @@ package pl.patrykkania.gradingsystem.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
-public class HomeController {
-
-    @GetMapping("/")
+public class AdminController {
+    @GetMapping("/admin")
     String Home() {
         return "home";
     }

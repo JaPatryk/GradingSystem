@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Service
 public class UserService implements UserDetailsService {
 
@@ -22,11 +25,15 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Logger logger = LoggerFactory.getLogger(getClass());
+
         Optional<User> userOptional = userRepository.findByEmail(email);
 
         User user = userOptional.orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
 
         List<GrantedAuthority> authorities = getAuthorities(user.getRoles());
+
+        logger.info("Loading user by username. Username: {}, Roles: {}", email, authorities);
 
         return new org.springframework.security.core.userdetails.User(
                 email,
