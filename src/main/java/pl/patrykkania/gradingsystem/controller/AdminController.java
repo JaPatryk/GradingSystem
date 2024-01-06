@@ -13,6 +13,7 @@ import pl.patrykkania.gradingsystem.service.StudentService;
 
 @Controller
 public class AdminController {
+
     @Autowired
     private StudentService studentService;
 

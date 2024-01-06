@@ -5,12 +5,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.patrykkania.gradingsystem.model.Student;
 import pl.patrykkania.gradingsystem.repository.StudentRepository;
+import pl.patrykkania.gradingsystem.repository.UserRepository;
 
 @Service
 public class StudentService {
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private StudentRepository studentRepository;
+
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     public Student save(Student student) {

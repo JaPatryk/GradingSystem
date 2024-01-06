@@ -17,7 +17,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http .csrf(csrf -> csrf.disable()).authorizeHttpRequests((requests) -> requests
                     .requestMatchers("/student/**").hasAnyRole("0", "1")
                     .requestMatchers("/teacher/**").hasAnyRole("0", "2")
-                    .anyRequest().hasRole("0")
+                    .anyRequest().permitAll()
             )
             .formLogin(form -> form
                     .loginPage("/login")
