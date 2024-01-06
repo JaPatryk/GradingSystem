@@ -14,13 +14,20 @@ public class Config {
 
 @Bean
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests((requests) -> requests
-            .anyRequest()
-            .authenticated())
+    http .csrf(csrf -> csrf.disable()).authorizeHttpRequests((requests) -> requests
+                    .requestMatchers("/student/**").hasAnyRole("0", "1")
+                    .requestMatchers("/teacher/**").hasAnyRole("0", "2")
+                    .anyRequest().permitAll()
+            )
             .formLogin(form -> form
                     .loginPage("/login")
-                    .defaultSuccessUrl("/")
+                    .successHandler(new CustomAuthenticationSuccessHandler())
                     .permitAll()
+            )
+            .logout(logout ->
+                    logout
+                            .logoutUrl("/logout")
+                            .logoutSuccessUrl("/login")
             );
     return http.build();
 }
