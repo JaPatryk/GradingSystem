@@ -11,15 +11,22 @@ public class Subject {
 
     private String subjectName;
 
-    private String leadingTeacher;//i tu kwestia chyba wlasnie czy robimy na sztywno nauczciela do przedmiotu bo jak tak to chyba tak zostaje
-    // a jak nie to tu tez by byla relacja i juz obiekt teacher wtedy ale to faktycznie pierdoleia jak chuj
+    @ManyToOne
+    @JoinColumn(name = "teacher")
+    private Teacher teacher;
+
+    @ManyToOne
+//    @JoinColumn(name = "class")
+    private StudentClass studentClass;
+
 
     public Subject() {
     }
 
-    public Subject(String subjectName, String leadingTeacher) {
+    public Subject(String subjectName, Teacher teacher, StudentClass studentClass) {
         this.subjectName = subjectName;
-        this.leadingTeacher = leadingTeacher;
+        this.teacher = teacher;
+        this.studentClass = studentClass;
     }
 
     public Long getId() {
@@ -38,12 +45,20 @@ public class Subject {
         this.subjectName = subjectName;
     }
 
-    public String getLeadingTeacher() {
-        return leadingTeacher;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setLeadingTeacher(String leadingTeacher) {
-        this.leadingTeacher = leadingTeacher;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public StudentClass getStudentClass() {
+        return studentClass;
+    }
+
+    public void setStudentClass(StudentClass studentClass) {
+        this.studentClass = studentClass;
     }
 }
 
