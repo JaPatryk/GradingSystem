@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.patrykkania.gradingsystem.model.Student;
+import pl.patrykkania.gradingsystem.model.Teacher;
 import pl.patrykkania.gradingsystem.service.StudentService;
-
+import pl.patrykkania.gradingsystem.service.TeacherService;
 
 
 @Controller
@@ -16,6 +17,9 @@ public class AdminController {
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private TeacherService teacherService;
 
     @GetMapping("/admin")
     String Home() {
@@ -26,6 +30,11 @@ public class AdminController {
     @GetMapping("/admin/add-student")
     String AddStudent() {
         return "admin/add-student";
+    }
+
+    @GetMapping("/admin/add-teacher")
+    String AddTeacher() {
+        return "admin/add-teacher";
     }
 
     @PostMapping("admin/add-student")
@@ -39,8 +48,22 @@ public class AdminController {
             model.addAttribute("error", "Wystąpił nieoczekiwany błąd.");
         }
 
+
+
 //        return "redirect:/admin/add-student";
 
+    }
+
+    @PostMapping("admin/add-teacher")
+    public void addTeacher(@ModelAttribute Teacher teacher, ModelMap model) {
+        try {
+            teacherService.save(teacher);
+            model.addAttribute("message", "Student został pomyślnie dodany");
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+        } catch (Exception e) {
+            model.addAttribute("error", "Wystąpił nieoczekiwany błąd.");
+        }
     }
 
 
