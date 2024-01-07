@@ -1,13 +1,15 @@
 package pl.patrykkania.gradingsystem.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 @Entity
 public class Student extends User {
     private String firstName;
     private String lastName;
-    private String className;
+
+    @ManyToOne
+//    @JoinColumn(name = "class")
+    private StudentClass studentClass;
     @Column(unique = true)
     private String pesel;
     private String dateOfBirth;
@@ -32,12 +34,12 @@ public class Student extends User {
         this.lastName = lastName;
     }
 
-    public String getClassName() {
-        return className;
+    public StudentClass getClassName() {
+        return studentClass;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setClassName(StudentClass studentClass) {
+        this.studentClass = studentClass;
     }
 
     public String getPesel() {

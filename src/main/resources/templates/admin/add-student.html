@@ -15,8 +15,12 @@
     <input type="text" id="firstName" name="firstName"><br>
     <label for="lastName">Last Name:</label><br>
     <input type="text" id="lastName" name="lastName"><br>
-    <label for="className">Class Name:</label><br>
-    <input type="text" id="className" name="className"><br>
+<!--    <label for="className">Class Name:</label><br>-->
+<!--    <input type="text" id="className" name="className"><br>-->
+    <label for="studentClass">Select Class:</label>
+    <select id="studentClass" name="studentClass.id">
+        <option th:each="studentClass : ${availableClasses}" th:value="${studentClass.id}" th:text="${studentClass.name}"></option>
+    </select>
     <label for="pesel">PESEL:</label><br>
     <input type="text" id="pesel" name="pesel"><br>
     <label for="dateOfBirth">Date of Birth:</label><br>
