@@ -33,7 +33,7 @@ public class UserService implements UserDetailsService {
 
         List<GrantedAuthority> authorities = getAuthorities(user.getRoles());
 
-        logger.info("Loading user by username. Username: {}, Roles: {}", email, authorities);
+//        logger.info("Loading user by username. Username: {}, Roles: {}", email, authorities);
 
         return new org.springframework.security.core.userdetails.User(
                 email,

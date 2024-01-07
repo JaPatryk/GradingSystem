@@ -1,0 +1,34 @@
+package pl.patrykkania.gradingsystem.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import pl.patrykkania.gradingsystem.model.Teacher;
+import pl.patrykkania.gradingsystem.repository.TeacherRepository;
+import pl.patrykkania.gradingsystem.repository.UserRepository;
+
+@Service
+public class TeacherService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private TeacherRepository teacherRepository;
+
+
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    public Teacher save(Teacher teacher) {
+        String hashedPassword = passwordEncoder.encode(teacher.getPassword());
+        teacher.setPassword(hashedPassword);
+        teacher.setRoles(2);
+        validatePeselUniqueness(teacher.getPesel());
+        return teacherRepository.save(teacher);
+    }
+
+    private void validatePeselUniqueness(String pesel) {
+        if (teacherRepository.existsByPesel(pesel)) {
+            throw new IllegalArgumentException("Numer PESEL już istnieje w bazie danych.");
+        }
+    }
+}

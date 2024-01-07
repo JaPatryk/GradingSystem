@@ -4,18 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
-import pl.patrykkania.gradingsystem.service.StudentService;
+import pl.patrykkania.gradingsystem.service.TeacherService;
 
 @Controller
-public class StudentController {
+public class TeacherController {
 
 
 
-    @GetMapping("/student")
+    @GetMapping("/teacher")
     String Home() {
 
-
-
-        return "student/student";
+        return "teacher/teacher";
     }
 }

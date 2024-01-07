@@ -32,6 +32,13 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
+            } else if (authority.getAuthority().equals("ROLE_2")) {
+                try {
+                    redirectStrategy.sendRedirect(request, response, "/teacher");
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             } else {
                 throw new IllegalStateException();
             }
