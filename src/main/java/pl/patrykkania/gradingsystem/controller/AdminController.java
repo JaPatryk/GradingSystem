@@ -59,7 +59,6 @@ public class AdminController {
             student.setStudentClass(studentClass);
             studentService.save(student);
             model.addAttribute("message", "Student został pomyślnie dodany");
-            //model.addAttribute("message", studentClassId);
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
         } catch (Exception e) {

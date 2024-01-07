@@ -1,11 +1,19 @@
 package pl.patrykkania.gradingsystem.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.patrykkania.gradingsystem.model.Student;
+import pl.patrykkania.gradingsystem.model.StudentClass;
+import pl.patrykkania.gradingsystem.model.User;
 import pl.patrykkania.gradingsystem.repository.StudentRepository;
 import pl.patrykkania.gradingsystem.repository.UserRepository;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -31,4 +39,35 @@ public class StudentService {
             throw new IllegalArgumentException("Numer PESEL już istnieje w bazie danych.");
         }
     }
+
+//zmiany
+//public List<Student> getStudentsInSameClass(String userEmail) {
+//    User loggedInUser = userRepository.findByEmail(userEmail);
+//
+//    if (loggedInUser != null && loggedInUser.getStudent() != null) {
+//        Class studentClass = loggedInUser.getStudent().getStudentClass();
+//        if (studentClass != null) {
+//            return studentRepository.findByStudentClass(studentClass);
+//        }
+//    }
+//
+//    return Collections.emptyList();
+//}
+
+    public List<Student> getStudentsInSameClass(String email) {
+        Optional<Student> optionalStudent = studentRepository.findByEmail(email);
+
+        if (optionalStudent.isPresent()) {
+            Student student = optionalStudent.get();
+            if (student.getStudentClass() != null) {
+                String className = student.getStudentClass().getName();
+                return studentRepository.findByStudentClass_Name(className);
+            }
+        }
+
+        return Collections.emptyList();
+    }
+
+
+
 }
