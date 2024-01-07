@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.patrykkania.gradingsystem.model.Student;
 import pl.patrykkania.gradingsystem.model.StudentClass;
 import pl.patrykkania.gradingsystem.model.Teacher;
@@ -27,6 +28,8 @@ public class AdminController {
     private TeacherService teacherService;
     @Autowired
     private StudentClassService studentClassService;
+
+
     @GetMapping("/admin")
     String Home() {
         return "home";
@@ -50,10 +53,13 @@ public class AdminController {
     }
 
     @PostMapping("admin/add-student")
-    public void addStudent(@ModelAttribute Student student, ModelMap model) {
+    public void addStudent(@ModelAttribute Student student, ModelMap model, @RequestParam("studentClass.id") Long studentClassId) {
         try {
+            StudentClass studentClass = studentClassService.getClassById(studentClassId);
+            student.setStudentClass(studentClass);
             studentService.save(student);
             model.addAttribute("message", "Student został pomyślnie dodany");
+            //model.addAttribute("message", studentClassId);
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
         } catch (Exception e) {

@@ -34,6 +34,14 @@ public class Student extends User {
         this.lastName = lastName;
     }
 
+    public StudentClass getStudentClass() {
+        return studentClass;
+    }
+
+    public void setStudentClass(StudentClass studentClass) {
+        this.studentClass = studentClass;
+    }
+
     public StudentClass getClassName() {
         return studentClass;
     }
