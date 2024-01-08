@@ -3,9 +3,12 @@ package pl.patrykkania.gradingsystem.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.patrykkania.gradingsystem.model.StudentClass;
 import pl.patrykkania.gradingsystem.model.Teacher;
 import pl.patrykkania.gradingsystem.repository.TeacherRepository;
 import pl.patrykkania.gradingsystem.repository.UserRepository;
+
+import java.util.List;
 
 @Service
 public class TeacherService {
@@ -30,5 +33,13 @@ public class TeacherService {
         if (teacherRepository.existsByPesel(pesel)) {
             throw new IllegalArgumentException("Numer PESEL już istnieje w bazie danych.");
         }
+    }
+
+    public List<Teacher> getAllTeacherss() {
+        return teacherRepository.findAll();
+    }
+
+    public Teacher getTeachersById(Long id) {
+        return teacherRepository.findTeacherById(id).orElse(null);
     }
 }

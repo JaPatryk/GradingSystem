@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.patrykkania.gradingsystem.model.Student;
 import pl.patrykkania.gradingsystem.model.StudentClass;
+import pl.patrykkania.gradingsystem.model.Subject;
 import pl.patrykkania.gradingsystem.model.Teacher;
 import pl.patrykkania.gradingsystem.service.StudentClassService;
 import pl.patrykkania.gradingsystem.service.StudentService;
+import pl.patrykkania.gradingsystem.service.SubjectService;
 import pl.patrykkania.gradingsystem.service.TeacherService;
 
 import java.util.List;
@@ -29,6 +31,8 @@ public class AdminController {
     @Autowired
     private StudentClassService studentClassService;
 
+    @Autowired
+    private SubjectService subjectService;
 
     @GetMapping("/admin")
     String Home() {
@@ -84,4 +88,40 @@ public class AdminController {
     }
 
 
+
+
+    //Przedmioty
+    @GetMapping("/admin/add-subject")
+    String AddSubject(Model model) {
+        List<StudentClass> availableClasses = studentClassService.getAllClasses();
+        List<Teacher> availableTeachers = teacherService.getAllTeacherss();
+
+
+        model.addAttribute("availableClasses", availableClasses);
+        model.addAttribute("availableTeachers", availableTeachers);
+
+        return "admin/add-subject";
+    }
+
+    @PostMapping("admin/add-subject")
+    public void addStudent(@ModelAttribute Subject subject, ModelMap model, @RequestParam("studentClass.id") Long studentClassId,@RequestParam("teacher") Long teacherId) {
+        try {
+            StudentClass studentClass = studentClassService.getClassById(studentClassId);
+            Teacher teacher = teacherService.getTeachersById(teacherId);
+            subject.setStudentClass(studentClass);
+            subject.setTeacher(teacher);
+
+            subjectService.save(subject);
+            model.addAttribute("message", "Przedmiot został pomyślnie dodany");
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+        } catch (Exception e) {
+            model.addAttribute("error", "Wystąpił nieoczekiwany błąd.");
+        }
+
+
+
+//        return "redirect:/admin/add-student";
+
+    }
 }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Student</title>
+</head>
+<body>
+<div th:if="${message}">
+    <p th:text="${message}" style="color: green;"></p>
+</div>
+<div th:if="${error}">
+    <p th:text="${error}" style="color: red;"></p>
+</div>
+<form action="/admin/add-subject" method="post">
+    <label for="subjectName">Przedmiot:</label><br>
+    <input type="text" id="subjectName" name="subjectName"><br>
+    <label for="studentClass">Wybierz klase</label>
+    <select id="studentClass" name="studentClass.id">
+        <option th:each="studentClass : ${availableClasses}" th:value="${studentClass.id}" th:text="${studentClass.name}"></option>
+    </select>
+    <select id="teacher" name="teacher">
+        <option th:each="teacher : ${availableTeachers}" th:value="${teacher.id}" th:text="${teacher.firstName}+' '+${teacher.lastName}"></option>
+    </select>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
