@@ -42,4 +42,9 @@ public class TeacherService {
     public Teacher getTeachersById(Long id) {
         return teacherRepository.findTeacherById(id).orElse(null);
     }
+    public Teacher getTeachersByEmail(String email) {
+        return teacherRepository.findTeacherByEmail(email).orElse(null);
+    }
+
+
 }

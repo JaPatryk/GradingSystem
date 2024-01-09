@@ -41,18 +41,6 @@ public class StudentService {
     }
 
 //zmiany
-//public List<Student> getStudentsInSameClass(String userEmail) {
-//    User loggedInUser = userRepository.findByEmail(userEmail);
-//
-//    if (loggedInUser != null && loggedInUser.getStudent() != null) {
-//        Class studentClass = loggedInUser.getStudent().getStudentClass();
-//        if (studentClass != null) {
-//            return studentRepository.findByStudentClass(studentClass);
-//        }
-//    }
-//
-//    return Collections.emptyList();
-//}
 
     public List<Student> getStudentsInSameClass(String email) {
         Optional<Student> optionalStudent = studentRepository.findByEmail(email);
@@ -69,5 +57,7 @@ public class StudentService {
     }
 
 
-
+    public List<Student> getStudentsByClassName(String className) {
+        return studentRepository.findByStudentClass_Name(className);
+    }
 }

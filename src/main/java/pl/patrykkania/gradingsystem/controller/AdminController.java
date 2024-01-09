@@ -28,6 +28,7 @@ public class AdminController {
 
     @Autowired
     private TeacherService teacherService;
+
     @Autowired
     private StudentClassService studentClassService;
 

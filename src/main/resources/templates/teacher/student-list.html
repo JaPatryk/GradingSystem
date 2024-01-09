@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<!--   Tue, 07 Jan 2020 03:33:27 GMT -->
+<head>
+
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Ecommerce Dashboard &mdash; CodiePie</title>
+
+    <!-- General CSS Files -->
+    <link th:href="@{/assets/modules/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/assets/modules/fontawesome/css/all.min.css}" rel="stylesheet" />
+
+    <!-- CSS Libraries -->
+    <link th:href="@{/assets/modules/jqvmap/dist/jqvmap.min.css}" rel="stylesheet" />
+    <link th:href="@{/assets/modules/summernote/summernote-bs4.css}" rel="stylesheet" />
+    <link th:href="@{/assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css}" rel="stylesheet" />
+    <link th:href="@{/assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css}" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+
+
+    <!-- Template CSS -->
+    <link th:href="@{/assets/css/style.min.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/components.min.css}" rel="stylesheet" />
+
+
+</head>
+<body class="layout-4">
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div>
+
+<div id="app">
+    <div class="main-wrapper main-wrapper-1">
+        <div class="navbar-bg"></div>
+
+        <!-- Start app top navbar -->
+        <nav class="navbar navbar-expand-lg main-navbar">
+            <form class="form-inline mr-auto">
+                <ul class="navbar-nav mr-3">
+                    <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+                    <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+                </ul>
+
+            </form>
+            <ul class="navbar-nav navbar-right">
+<!--                <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>-->
+<!--                    <div class="dropdown-menu dropdown-list dropdown-menu-right">-->
+<!--                        <div class="dropdown-header">Notifications-->
+<!--                            <div class="float-right">-->
+<!--                                <a href="#">Mark All As Read</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="dropdown-list-content dropdown-list-icons">-->
+<!--                            <a href="#" class="dropdown-item dropdown-item-unread">-->
+<!--                                <div class="dropdown-item-icon bg-primary text-white">-->
+<!--                                    <i class="fas fa-code"></i>-->
+<!--                                </div>-->
+<!--                                <div class="dropdown-item-desc"> Template update is available now!-->
+<!--                                    <div class="time text-primary">2 Min Ago</div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                            <a href="#" class="dropdown-item">-->
+<!--                                <div class="dropdown-item-icon bg-info text-white">-->
+<!--                                    <i class="far fa-user"></i>-->
+<!--                                </div>-->
+<!--                                <div class="dropdown-item-desc">-->
+<!--                                    <b>You</b> and <b>Dedik Sugiharto</b> are now friends-->
+<!--                                    <div class="time">10 Hours Ago</div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                            <a href="#" class="dropdown-item">-->
+<!--                                <div class="dropdown-item-icon bg-success text-white">-->
+<!--                                    <i class="fas fa-check"></i>-->
+<!--                                </div>-->
+<!--                                <div class="dropdown-item-desc">-->
+<!--                                    <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>-->
+<!--                                    <div class="time">12 Hours Ago</div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                            <a href="#" class="dropdown-item">-->
+<!--                                <div class="dropdown-item-icon bg-danger text-white">-->
+<!--                                    <i class="fas fa-exclamation-triangle"></i>-->
+<!--                                </div>-->
+<!--                                <div class="dropdown-item-desc">-->
+<!--                                    Low disk space. Let's clean it!-->
+<!--                                    <div class="time">17 Hours Ago</div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                            <a href="#" class="dropdown-item">-->
+<!--                                <div class="dropdown-item-icon bg-info text-white">-->
+<!--                                    <i class="fas fa-bell"></i>-->
+<!--                                </div>-->
+<!--                                <div class="dropdown-item-desc">-->
+<!--                                    Welcome to CodiePie template!-->
+<!--                                    <div class="time">Yesterday</div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div class="dropdown-footer text-center">-->
+<!--                            <a href="#">View All <i class="fas fa-chevron-right"></i></a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li class="dropdown">-->
+<!--                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">-->
+<!--                        <div class="d-sm-none d-lg-inline-block">Hi, <span th:text="${username}"></span></div></a>-->
+<!--                    <div class="dropdown-menu dropdown-menu-right">-->
+<!--                        <a href="features-settings.html" class="dropdown-item has-icon"><i class="fas fa-cog"></i> Settings</a>-->
+<!--                        <div class="dropdown-divider"></div>-->
+<!--                        <form action="/logout" method="post">-->
+<!--                        <button  type="submit" class="dropdown-item has-icon text-danger">-->
+<!--&lt;!&ndash;                            <input type="submit" value="Wyloguj" />&ndash;&gt;-->
+<!--                           <i class="fas fa-sign-out-alt"></i> Logout</button>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </li>-->
+                <form action="/logout" method="post">
+                    <button  type="submit" class="dropdown-item has-icon text-danger">
+                        <i class="fas fa-sign-out-alt"></i>Logout</button>
+                </form>
+            </ul>
+        </nav>
+
+        <!-- Start main left sidebar menu -->
+        <div class="main-sidebar sidebar-style-3">
+            <aside id="sidebar-wrapper">
+                <div class="sidebar-brand">
+                    <a href="index-2.html">CodiePie</a>
+                </div>
+                <div class="sidebar-brand sidebar-brand-sm">
+                    <a href="index-2.html">CP</a>
+                </div>
+                <ul class="sidebar-menu">
+
+                    <li class="menu-header">Ogólne</li>
+                    <li class="dropdown">
+                        <a href="student/oceny" class="nav-link " data-toggle="dropdown"><i class="fas fa-graduation-cap"></i> <span>Oceny</span></a>
+                    </li>
+                    <li class="">
+                        <a href="/student/list" class="nav-link " ><i class="fas fa-users"></i><span>Klasa</span></a>
+                    </li>
+
+
+                </ul>
+                <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+                    <a href="https://getcodiepie.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split"><i class="fas fa-rocket"></i> Documentation</a>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Start app main Content -->
+
+
+            <div class="main-content" style="min-height: 858px;">
+                <section class="section">
+
+                    <div class="section-body">
+                        <h2 class="section-title">Table</h2>
+
+                        <div class="row">
+
+                            <div class="col-12 col-md-6 col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Full Width</h4>
+                                    </div>
+                                    <div class="card-body p-0">
+<!--                                        <div class="table-responsive">-->
+<!--                                            <table class="table table-striped table-md v_center">-->
+<!--                                                <tbody><tr>-->
+<!--                                                    <th>Imię</th>-->
+<!--                                                    <th>Nazwisko</th>-->
+<!--                                                </tr>-->
+<!--                                                <tr th:each="student : ${students}">-->
+<!--                                                    <td th:text="${student.firstName}"></td>-->
+<!--                                                    <td th:text="${student.lastName}"></td>-->
+<!--&lt;!&ndash;                                                    <td><div class="badge badge-success">Active</div></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <td><a href="#" class="btn btn-secondary">Detail</a></td>&ndash;&gt;-->
+<!--                                                </tr>-->
+
+<!--                                                </tbody></table>-->
+<!--                                        </div>-->
+                                    </div>
+
+                                    <form id="classForm">
+                                        <label for="className">Wybierz klasę:</label>
+                                        <select id="className" name="className" onchange="loadStudents()">
+                                            <option selected >Wybierz klase</option>
+                                            <option th:each="studentClass : ${availableClasses}" th:value="${studentClass.name}" th:text="${studentClass.name}"></option>
+                                        </select>
+                                    </form>
+
+                                    <div id="studentList">
+                                        <!-- Dodaj pętlę Thymeleaf do wyświetlenia studentów -->
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th>Imię</th>
+                                                <th>Nazwisko</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody id="studentTableBody">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </section>
+            </div>
+
+
+    </div>
+</div>
+
+<!-- General JS Scripts -->
+<script type="text/javascript" th:src="@{/assets/bundles/lib.vendor.bundle.js}"></script>
+<script type="text/javascript" th:src="@{/js/CodiePie.js}"></script>
+
+
+<!-- JS Libraies -->
+<script type="text/javascript" th:src="@{/assets/modules/jquery.sparkline.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/modules/chart.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/modules/owlcarousel2/dist/owl.carousel.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/modules/summernote/summernote-bs4.js}"></script>
+<script type="text/javascript" th:src="@{/assets/modules/chocolat/dist/js/jquery.chocolat.min.js}"></script>
+
+
+<!-- Page Specific JS File -->
+<script type="text/javascript" th:src="@{/js/page/index.js}"></script>
+<!--<script src="/../static/js/page/index.js"></script>-->
+
+<!-- Template JS File -->
+<script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+<script type="text/javascript" th:src="@{/js/custom.js}"></script>
+
+<!-- Skrypt AJAX do asynchronicznego ładowania studentów -->
+<script th:inline="javascript">
+    // function loadStudents() {
+    //     console.log("dziala");
+    //     var selectedClass = $("#className").val();
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "/teacher/listStudents",
+    //         data: {className: selectedClass},
+    //         success: function (data) {
+    //             alert("Data received: " + JSON.stringify(data)); // Dodaj alert
+    //             console.log(data);
+    //             $("#studentList").html(data);
+    //         },
+    //         error: function () {
+    //             alert("Wystąpił błąd przy pobieraniu studentów.");
+    //             console.log("błąd",data);
+    //         }
+    //     });
+    //
+    //     console.log("dziala 2");
+    // }
+    // function loadStudents() {
+    //     var selectedClass = $("#className").val();
+    //     console.log("Loading students for class: " + selectedClass);
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "/teacher/listStudents",
+    //         data: {className: selectedClass},
+    //         dataType: "json", // Oczekuj odpowiedzi w formie JSON
+    //         success: function (data) {
+    //             console.log("Received data:", data);
+    //             // Tutaj możesz użyć danych JSON w dowolny sposób, np. aktualizować interfejs użytkownika
+    //         },
+    //         error: function () {
+    //             alert("An error occurred while fetching students.");
+    //         }
+    //     });
+    // }
+    function loadStudents() {
+        var selectedClass = $("#className").val();
+        console.log("Loading students for class: " + selectedClass);
+        $.ajax({
+            type: "GET",
+            url: "/teacher/listStudents",
+            data: {className: selectedClass},
+            dataType: "json", // Wskazuje, że oczekujemy danych w formie JSON
+            success: function (data) {
+                console.log("Received data:", data);
+                updateTable(data);
+                // Tutaj możesz użyć danych JSON w dowolny sposób, np. aktualizować interfejs użytkownika
+            },
+            error: function () {
+                alert("An error occurred while fetching students.");
+            }
+        });
+    }
+
+    function updateTable(students) {
+        // Wyczyszczenie tabeli przed dodaniem nowych danych
+        $("#studentTableBody").empty();
+
+        // Iteracja przez dane JSON i dodanie wierszy do tabeli
+        for (var i = 0; i < students.length; i++) {
+            var student = students[i];
+            var row = "<tr>" +
+                "<td>" + student.firstName + "</td>" +
+                "<td>" + student.lastName + "</td>" +
+                // Dodaj inne kolumny według potrzeb
+                "</tr>";
+            $("#studentTableBody").append(row);
+        }
+    }
+</script>
+
+</body>
+
+</html>
