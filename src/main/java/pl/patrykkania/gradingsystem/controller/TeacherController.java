@@ -7,24 +7,23 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import pl.patrykkania.gradingsystem.model.Student;
-import pl.patrykkania.gradingsystem.model.StudentClass;
-import pl.patrykkania.gradingsystem.model.Subject;
-import pl.patrykkania.gradingsystem.model.Teacher;
-import pl.patrykkania.gradingsystem.service.StudentClassService;
-import pl.patrykkania.gradingsystem.service.StudentService;
-import pl.patrykkania.gradingsystem.service.SubjectService;
-import pl.patrykkania.gradingsystem.service.TeacherService;
+import pl.patrykkania.gradingsystem.model.*;
+import pl.patrykkania.gradingsystem.repository.StudentClassRepository;
+import pl.patrykkania.gradingsystem.service.*;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class TeacherController {
+
+
+    @Autowired
+    StudentClassRepository studentClassRepository;
+
+    @Autowired
+    private GradeService gradeService;
 
     @Autowired
     private StudentService studentService;
@@ -58,11 +57,37 @@ public class TeacherController {
         String teacherEmail = authentication.getName();
         Teacher teacher = teacherService.getTeachersByEmail(teacherEmail);
         Long TeacherId = teacher.getId();
+        String email = teacher.getEmail();
         List<StudentClass> availablesStudentClass = subjectService.findClassesByTeacherId(TeacherId);
         model.addAttribute("availablesStudentClass", availablesStudentClass);
-        model.addAttribute("email", TeacherId);
-        return "teacher/add-grade";
+        model.addAttribute("email", email);
+        model.addAttribute("teacherId", TeacherId);
+        return "/teacher/add-grade";
     }
+
+
+
+    @PostMapping("/teacher/add-grade")
+    public String addGrade(@ModelAttribute Grade grade) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String teacherEmail = authentication.getName();
+//        System.out.println(teacherEmail);
+//        Long id = grade.getTeacher().getId();
+  //      System.out.println(id);
+//        Teacher teacher = teacherService.getTeachersByEmail(teacherEmail);
+
+        Grade newGrade = new Grade();
+        newGrade.setTeacher(grade.getTeacher());
+        newGrade.setDate(new Date());
+        newGrade.setSubject(grade.getSubject());
+        newGrade.setStudent(grade.getStudent());
+        newGrade.setGrade(grade.getGrade());
+
+        gradeService.createGrade(newGrade);
+        System.out.println("Dodao"+ newGrade.getId());
+        return "redirect:/teacher/add-grade";
+    }
+
 
     @GetMapping("/teacher/listStudents")
     public ResponseEntity<List<Student>> listStudents(@RequestParam String className) {
@@ -80,8 +105,6 @@ public class TeacherController {
     public ResponseEntity<List<Subject>> listSubject(@RequestParam String className, @RequestParam Long teacherId) {
         try {
             Long id= studentClassService.getClassByName(className);
-            //int intValue = teacher;
-            //Long teacherId= Long.valueOf(intValue);
             List<Subject> subjects = subjectService.getSubjectsByClassIdAndTeacherId(id,teacherId);
             return ResponseEntity.ok(subjects);
         } catch (Exception e) {
@@ -91,3 +114,7 @@ public class TeacherController {
     }
 
 }
+
+
+
+

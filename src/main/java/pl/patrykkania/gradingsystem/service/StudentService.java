@@ -60,4 +60,9 @@ public class StudentService {
     public List<Student> getStudentsByClassName(String className) {
         return studentRepository.findByStudentClass_Name(className);
     }
+
+    public Optional<Student> getStudentByEmail(String email) {
+        return studentRepository.findByEmail(email);
+    }
+
 }

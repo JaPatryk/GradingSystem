@@ -30,8 +30,8 @@ public class StudentClassService {
         return studentClassRepository.findById(id).orElse(null);
     }
 
-//    public StudentClass getClassByName(String name) {
-//        return studentClassRepository.findByName(name).orElse(null);
+//    public StudentClass getClassByName(StudentClass student) {
+//        return studentClassRepository.findByName(student).orElse(null);
 //    }
 public Long getClassByName(String name) {
     Optional<StudentClass> studentClassOptional = studentClassRepository.findByName(name);
@@ -47,6 +47,7 @@ public Long getClassByName(String name) {
     }
 
 
-    // zmiany
+
 
 }
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Class</title>
+</head>
+<body>
+<h2>Dodaj klasę</h2>
+
+<!-- Dodaj komunikat o błędzie, jeśli istnieje -->
+<div th:if="${error}" class="alert alert-danger">
+    <p th:text="${error}"></p>
+</div>
+
+<!-- Dodaj komunikat o sukcesie, jeśli istnieje -->
+<div th:if="${message}" class="alert alert-success">
+    <p th:text="${message}"></p>
+</div>
+
+<!-- Formularz dodawania klasy -->
+<form th:action="@{/admin/add-class}" th:object="${studentClass}" method="post">
+    <label for="name">Nazwa klasy:</label>
+    <input type="text" id="name" name="name" th:field="*{name}" required>
+
+    <button type="submit">Dodaj klasę</button>
+</form>
+</body>
+</html>

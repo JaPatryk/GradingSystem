@@ -3,6 +3,7 @@ package pl.patrykkania.gradingsystem.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="grade")
@@ -84,5 +85,13 @@ public class Grade {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Long getStudentId() {
+        return this.student.getId();
+    }
+
+    public Long getSubjectId() {
+        return this.subject.getId();
     }
 }

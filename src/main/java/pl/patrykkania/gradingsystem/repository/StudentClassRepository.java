@@ -10,7 +10,8 @@ import java.util.Optional;
 
 public interface StudentClassRepository extends JpaRepository<StudentClass, Long> {
 
-//    List<StudentClass> findBySubjectId(Long id);
+
+
 
     Optional<StudentClass> findByName(String name);
 }

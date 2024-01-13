@@ -166,18 +166,12 @@
                             <div class="col-12 col-md-6 col-lg-6">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Wybeirz</h4>
+                                        <h4>Wybierz</h4>
                                     </div>
                                     <h1 th:text="${email}"></h1>
-                                    <input id="teacher" type="hidden" th:value="${email}">
-<!--                                    <form id="subjectForm">-->
-<!--                                        <label for="subject">Wybierz Przedmio</label>-->
-<!--                                        <select id="subject" name="subjectName">-->
-<!--                                           <option selected >Wybierz przedmiot</option>-->
-<!--                                           <option th:each="subject : ${availableSubjects}" th:value="${subject.id}" th:text="${subject.subjectName}"></option>-->
-<!--                                      </select>-->
-<!--                                    </form>-->
-                                    <form id="gradeForm">
+
+                                    <form id="gradeForm" action="/teacher/add-grade" method="post">
+                                        <input id="teacher" type="hidden" th:value="${teacherId}" name="teacher">
                                         <label for="className">Wybierz klasę:</label>
                                         <select id="className" name="className" onchange="loadStudents()">
                                             <option selected >Wybierz klase</option>
@@ -192,13 +186,13 @@
                                           </select>
                                         <select id="student" name="student" >
                                             <option selected >Wybierz Studenta</option>
-<!--                                            <option th:each="subject : ${availableSubjects}" th:value="${subject.id}" th:text="${subject.subjectName}"></option>-->
+                                            <option th:each="subject : ${availableSubjects}" th:value="${subject.id}" th:text="${subject.subjectName}"></option>
                                         </select>
+                                        <label for="grade">Wpisz ocenę</label>
+                                        <input type="number" id="grade" name="grade" min="1" max="6">
 
+                                        <button type="submit">Dodaj ocenę</button>
                                       </form>
-
-
-
                                 </div>
                             </div>
                         </div>

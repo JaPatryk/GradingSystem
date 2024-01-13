@@ -22,7 +22,7 @@
         <option th:each="studentClass : ${availableClasses}" th:value="${studentClass.id}" th:text="${studentClass.name}"></option>
     </select>
     <label for="pesel">PESEL:</label><br>
-    <input type="text" id="pesel" name="pesel"><br>
+    <input type="text" id="pesel" name="pesel" maxlength="11" required minlength="11"><br>
     <label for="dateOfBirth">Date of Birth:</label><br>
     <input type="date" id="dateOfBirth" name="dateOfBirth"><br>
     <label for="city">City:</label><br>

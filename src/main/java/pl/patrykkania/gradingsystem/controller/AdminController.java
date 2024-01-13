@@ -80,7 +80,7 @@ public class AdminController {
     public void addTeacher(@ModelAttribute Teacher teacher, ModelMap model) {
         try {
             teacherService.save(teacher);
-            model.addAttribute("message", "Student został pomyślnie dodany");
+            model.addAttribute("message", "Nauczyciel został pomyślnie dodany");
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
         } catch (Exception e) {
@@ -106,8 +106,9 @@ public class AdminController {
 
     @PostMapping("admin/add-subject")
     public void addStudent(@ModelAttribute Subject subject, ModelMap model, @RequestParam("studentClass.id") Long studentClassId,@RequestParam("teacher") Long teacherId) {
+        StudentClass studentClass;
         try {
-            StudentClass studentClass = studentClassService.getClassById(studentClassId);
+            studentClass = studentClassService.getClassById(studentClassId);
             Teacher teacher = teacherService.getTeachersById(teacherId);
             subject.setStudentClass(studentClass);
             subject.setTeacher(teacher);
@@ -119,10 +120,28 @@ public class AdminController {
         } catch (Exception e) {
             model.addAttribute("error", "Wystąpił nieoczekiwany błąd.");
         }
-
-
-
-//        return "redirect:/admin/add-student";
-
     }
+
+    //Klasy
+    @GetMapping("/admin/add-class")
+    String addClass(Model model) {
+        StudentClass studentClass = new StudentClass();
+        model.addAttribute("studentClass", studentClass);
+        return "admin/add-class";
+    }
+
+    @PostMapping("/admin/add-class")
+    public String addClass(@ModelAttribute StudentClass studentClass, ModelMap model) {
+        try {
+            studentClassService.saveClass(studentClass);
+            model.addAttribute("message", "Klasa została pomyślnie dodana");
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+        } catch (Exception e) {
+            model.addAttribute("error", "Wystąpił nieoczekiwany błąd.");
+        }
+    return "admin/add-class";
+    }
+
+
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.patrykkania.gradingsystem.model.Grade;
+import pl.patrykkania.gradingsystem.model.Student;
 import pl.patrykkania.gradingsystem.repository.GradeRepository;
 
 import java.util.List;
@@ -27,7 +28,6 @@ import java.util.List;
         }
 
         public Grade createGrade(Grade grade) {
-            //tutaj cos mozna dorzucic zeby nie dalo sie innego niz 1-6 czy tam 2-5 jak tam bdmy robic wkoncu
             return gradeRepository.save(grade);
         }
 
@@ -42,7 +42,17 @@ import java.util.List;
         public void deleteGrade(Long id) {
             gradeRepository.deleteById(id);
         }
-        //no i chuj bo tutaj niby cos pododawac tez jeszcze mozna ale nw co
+
+
+        public List<Grade> createGrades(List<Grade> grades) {
+            return gradeRepository.saveAll(grades);
+        }
+
+        //do wszystkich ocen
+        public List<Grade> getGradesByStudentId(Long Id){
+            return gradeRepository.findByStudent_Id(Id);
+        }
+
 
 
     }
