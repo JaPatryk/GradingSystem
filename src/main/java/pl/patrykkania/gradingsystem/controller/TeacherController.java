@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.patrykkania.gradingsystem.model.*;
 import pl.patrykkania.gradingsystem.repository.StudentClassRepository;
 import pl.patrykkania.gradingsystem.service.*;
@@ -68,13 +69,7 @@ public class TeacherController {
 
 
     @PostMapping("/teacher/add-grade")
-    public String addGrade(@ModelAttribute Grade grade) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String teacherEmail = authentication.getName();
-//        System.out.println(teacherEmail);
-//        Long id = grade.getTeacher().getId();
-  //      System.out.println(id);
-//        Teacher teacher = teacherService.getTeachersByEmail(teacherEmail);
+    public String addGrade(@ModelAttribute Grade grade, RedirectAttributes redirectAttributes) {
 
         Grade newGrade = new Grade();
         newGrade.setTeacher(grade.getTeacher());
@@ -84,7 +79,9 @@ public class TeacherController {
         newGrade.setGrade(grade.getGrade());
 
         gradeService.createGrade(newGrade);
-        System.out.println("Dodao"+ newGrade.getId());
+
+        // Dodaj komunikat do przekierowania
+        redirectAttributes.addFlashAttribute("successMessage", "Ocena została dodana pomyślnie!");
         return "redirect:/teacher/add-grade";
     }
 

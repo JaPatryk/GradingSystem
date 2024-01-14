@@ -39,7 +39,7 @@ public Long getClassByName(String name) {
     if (studentClassOptional.isPresent()) {
         return studentClassOptional.get().getId();
     } else {
-        return null; // lub rzucenie odpowiedniego wyjątku, jeśli to jest preferowane
+        return null;
     }
 }
     public void saveClass(StudentClass studentClass) {

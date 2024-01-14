@@ -2,22 +2,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
-<!--   Tue, 07 Jan 2020 03:33:27 GMT -->
 <head>
 
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Ecommerce Dashboard &mdash; CodiePie</title>
+    <title>Oceny</title>
 
     <!-- General CSS Files -->
     <link th:href="@{/assets/modules/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
     <link th:href="@{/assets/modules/fontawesome/css/all.min.css}" rel="stylesheet" />
 
     <!-- CSS Libraries -->
-    <link th:href="@{/assets/modules/jqvmap/dist/jqvmap.min.css}" rel="stylesheet" />
-    <link th:href="@{/assets/modules/summernote/summernote-bs4.css}" rel="stylesheet" />
-    <link th:href="@{/assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css}" rel="stylesheet" />
-    <link th:href="@{/assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css}" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
 
 
@@ -36,92 +31,20 @@
 <div id="app">
     <div class="main-wrapper main-wrapper-1">
         <div class="navbar-bg"></div>
-
         <!-- Start app top navbar -->
         <nav class="navbar navbar-expand-lg main-navbar">
             <form class="form-inline mr-auto">
                 <ul class="navbar-nav mr-3">
                     <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-                    <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
                 </ul>
-
             </form>
             <ul class="navbar-nav navbar-right">
-<!--                <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>-->
-<!--                    <div class="dropdown-menu dropdown-list dropdown-menu-right">-->
-<!--                        <div class="dropdown-header">Notifications-->
-<!--                            <div class="float-right">-->
-<!--                                <a href="#">Mark All As Read</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="dropdown-list-content dropdown-list-icons">-->
-<!--                            <a href="#" class="dropdown-item dropdown-item-unread">-->
-<!--                                <div class="dropdown-item-icon bg-primary text-white">-->
-<!--                                    <i class="fas fa-code"></i>-->
-<!--                                </div>-->
-<!--                                <div class="dropdown-item-desc"> Template update is available now!-->
-<!--                                    <div class="time text-primary">2 Min Ago</div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                            <a href="#" class="dropdown-item">-->
-<!--                                <div class="dropdown-item-icon bg-info text-white">-->
-<!--                                    <i class="far fa-user"></i>-->
-<!--                                </div>-->
-<!--                                <div class="dropdown-item-desc">-->
-<!--                                    <b>You</b> and <b>Dedik Sugiharto</b> are now friends-->
-<!--                                    <div class="time">10 Hours Ago</div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                            <a href="#" class="dropdown-item">-->
-<!--                                <div class="dropdown-item-icon bg-success text-white">-->
-<!--                                    <i class="fas fa-check"></i>-->
-<!--                                </div>-->
-<!--                                <div class="dropdown-item-desc">-->
-<!--                                    <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>-->
-<!--                                    <div class="time">12 Hours Ago</div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                            <a href="#" class="dropdown-item">-->
-<!--                                <div class="dropdown-item-icon bg-danger text-white">-->
-<!--                                    <i class="fas fa-exclamation-triangle"></i>-->
-<!--                                </div>-->
-<!--                                <div class="dropdown-item-desc">-->
-<!--                                    Low disk space. Let's clean it!-->
-<!--                                    <div class="time">17 Hours Ago</div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                            <a href="#" class="dropdown-item">-->
-<!--                                <div class="dropdown-item-icon bg-info text-white">-->
-<!--                                    <i class="fas fa-bell"></i>-->
-<!--                                </div>-->
-<!--                                <div class="dropdown-item-desc">-->
-<!--                                    Welcome to CodiePie template!-->
-<!--                                    <div class="time">Yesterday</div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                        </div>-->
-<!--                        <div class="dropdown-footer text-center">-->
-<!--                            <a href="#">View All <i class="fas fa-chevron-right"></i></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </li>-->
-<!--                <li class="dropdown">-->
-<!--                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">-->
-<!--                        <div class="d-sm-none d-lg-inline-block">Hi, <span th:text="${username}"></span></div></a>-->
-<!--                    <div class="dropdown-menu dropdown-menu-right">-->
-<!--                        <a href="features-settings.html" class="dropdown-item has-icon"><i class="fas fa-cog"></i> Settings</a>-->
-<!--                        <div class="dropdown-divider"></div>-->
-<!--                        <form action="/logout" method="post">-->
-<!--                        <button  type="submit" class="dropdown-item has-icon text-danger">-->
-<!--&lt;!&ndash;                            <input type="submit" value="Wyloguj" />&ndash;&gt;-->
-<!--                           <i class="fas fa-sign-out-alt"></i> Logout</button>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                </li>-->
-                <form action="/logout" method="post">
-                    <button  type="submit" class="dropdown-item has-icon text-danger">
-                        <i class="fas fa-sign-out-alt"></i>Logout</button>
-                </form>
+                <li>
+                    <form action="/logout" method="post">
+                        <button  type="submit" class="btn has-icon text-danger">
+                            <i class="fas fa-sign-out-alt"></i>Logout</button>
+                    </form>
+                </li>
             </ul>
         </nav>
 
@@ -129,26 +52,21 @@
         <div class="main-sidebar sidebar-style-3">
             <aside id="sidebar-wrapper">
                 <div class="sidebar-brand">
-                    <a href="index-2.html">CodiePie</a>
+                    <a href="/">System Oceniania</a>
                 </div>
                 <div class="sidebar-brand sidebar-brand-sm">
-                    <a href="index-2.html">CP</a>
+                    <a href="/">SO</a>
                 </div>
                 <ul class="sidebar-menu">
-
                     <li class="menu-header">Ogólne</li>
-                    <li class="dropdown">
-                        <a href="student/oceny" class="nav-link " data-toggle="dropdown"><i class="fas fa-graduation-cap"></i> <span>Oceny</span></a>
+                    <li>
+                        <a href="/teacher/add-grade" class="nav-link "><i class="fas fa-graduation-cap"></i><span>Dodaj ocene</span></a>
                     </li>
-                    <li class="">
-                        <a href="/student/list" class="nav-link " ><i class="fas fa-users"></i><span>Klasa</span></a>
+                    <li >
+                        <a href="/teacher/list" class="nav-link " ><i class="fas fa-users"></i><span>Klasy</span></a>
                     </li>
-
-
                 </ul>
-                <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-                    <a href="https://getcodiepie.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split"><i class="fas fa-rocket"></i> Documentation</a>
-                </div>
+
             </aside>
         </div>
 
@@ -157,47 +75,58 @@
 
             <div class="main-content" style="min-height: 858px;">
                 <section class="section">
-
+                    <div class="section-header">
+                        <h1>Dodaj ocene</h1>
+                    </div>
+                    <div th:if="${successMessage}" class="alert alert-success">
+                        <p th:text="${successMessage}"></p>
+                    </div>
                     <div class="section-body">
-                        <h2 class="section-title">Dodaj ocene</h2>
-
                         <div class="row">
-
-                            <div class="col-12 col-md-6 col-lg-6">
+                            <div class="col-12">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h4>Wybierz</h4>
-                                    </div>
-                                    <h1 th:text="${email}"></h1>
-
+                                    <div class="card-body">
                                     <form id="gradeForm" action="/teacher/add-grade" method="post">
                                         <input id="teacher" type="hidden" th:value="${teacherId}" name="teacher">
+                                        <div class="form-group">
                                         <label for="className">Wybierz klasę:</label>
-                                        <select id="className" name="className" onchange="loadStudents()">
-                                            <option selected >Wybierz klase</option>
+                                        <select required id="className" name="className" onchange="loadStudents()" class="form-control">
+                                            <option selected value="">Wybierz klasę</option>
                                             <option th:each="studentClass : ${availablesStudentClass}" th:value="${studentClass.name}" th:text="${studentClass.name}"></option>
                                         </select>
-
-
-                                      <label for="subject">Wybierz Przedmio</label>
-                                        <select id="subject" name="subject" >
-                                            <option selected >Wybierz przedmiot</option>
+                                        </div>
+                                        <div class="form-group">
+                                      <label for="subject">Wybierz przedmiot</label>
+                                        <select required id="subject" name="subject" class="form-control">
+                                            <option selected value="">Wybierz przedmiot</option>
                                             <option th:each="subject : ${availableSubjects}" th:value="${subject.id}" th:text="${subject.subjectName}"></option>
                                           </select>
-                                        <select id="student" name="student" >
-                                            <option selected >Wybierz Studenta</option>
+                                        </div>
+                                            <div class="form-group">
+                                        <select required id="student" name="student" class="form-control">
+                                            <option value="" selected>Wybierz ucznia</option>
                                             <option th:each="subject : ${availableSubjects}" th:value="${subject.id}" th:text="${subject.subjectName}"></option>
                                         </select>
+                                            </div>
+                                        <div class="form-group">
                                         <label for="grade">Wpisz ocenę</label>
-                                        <input type="number" id="grade" name="grade" min="1" max="6">
-
-                                        <button type="submit">Dodaj ocenę</button>
+                                        <select required id="grade" name="grade" class="form-control">
+                                            <option value="" selected>Wybierz ocenę</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select>
+                                        </div>
+                                        <button onclick="validateForm()" type="button" class="btn btn-primary">Dodaj ocenę</button>
+                                        <div id="formValid" class="text-danger py-4 d-none">Uzupełnij wszystkie pola</div>
                                       </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </section>
             </div>
@@ -212,22 +141,14 @@
 
 
 <!-- JS Libraies -->
-<script type="text/javascript" th:src="@{/assets/modules/jquery.sparkline.min.js}"></script>
-<script type="text/javascript" th:src="@{/assets/modules/chart.min.js}"></script>
-<script type="text/javascript" th:src="@{/assets/modules/owlcarousel2/dist/owl.carousel.min.js}"></script>
-<script type="text/javascript" th:src="@{/assets/modules/summernote/summernote-bs4.js}"></script>
-<script type="text/javascript" th:src="@{/assets/modules/chocolat/dist/js/jquery.chocolat.min.js}"></script>
-
 
 <!-- Page Specific JS File -->
 <script type="text/javascript" th:src="@{/js/page/index.js}"></script>
-<!--<script src="/../static/js/page/index.js"></script>-->
 
 <!-- Template JS File -->
 <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
 <script type="text/javascript" th:src="@{/js/custom.js}"></script>
 
-<!-- Skrypt AJAX do asynchronicznego ładowania studentów -->
 <script th:inline="javascript">
     function loadStudents() {
         var selectedClass = $("#className").val();
@@ -242,7 +163,7 @@
                 updateStudent(data);
             },
             error: function () {
-                alert("Error");
+                alert("Błąd podczas wczytywania uczniów");
             }
         });
 
@@ -255,7 +176,7 @@
                 updateSubject(data);
             },
             error: function () {
-                alert("Error");
+                alert("Błąd podczas wczytywania przedmiotów");
             }
         });
     }
@@ -274,12 +195,32 @@
         $("#subject").empty();
         for (var i = 0; i < subjects.length; i++) {
             var subject = subjects[i];
-            var option = "<option value='"+subject.id+"'>" +
+            var option = "<option value='" + subject.id + "'>" +
                 subject.subjectName +
                 "</option>";
             $("#subject").append(option);
         }
     }
+
+    function validateForm(){
+        var form = $("#gradeForm");
+        var selects = $("#gradeForm select");
+        var valid = true;
+
+        selects.each(function() {
+            if ($(this).val() === "") {
+                valid = false;
+                return false;
+            }
+        });
+
+        if (!valid) {
+            $('#formValid').removeClass("d-none");
+        }else {
+            form.submit();
+        }
+        }
+
 </script>
 
 </body>

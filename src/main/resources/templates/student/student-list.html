@@ -2,22 +2,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
-<!--   Tue, 07 Jan 2020 03:33:27 GMT -->
 <head>
 
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Ecommerce Dashboard &mdash; CodiePie</title>
+    <title>Klasa</title>
 
     <!-- General CSS Files -->
     <link th:href="@{/assets/modules/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
     <link th:href="@{/assets/modules/fontawesome/css/all.min.css}" rel="stylesheet" />
 
     <!-- CSS Libraries -->
-    <link th:href="@{/assets/modules/jqvmap/dist/jqvmap.min.css}" rel="stylesheet" />
-    <link th:href="@{/assets/modules/summernote/summernote-bs4.css}" rel="stylesheet" />
-    <link th:href="@{/assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css}" rel="stylesheet" />
-    <link th:href="@{/assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css}" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
 
 
@@ -36,92 +31,20 @@
 <div id="app">
     <div class="main-wrapper main-wrapper-1">
         <div class="navbar-bg"></div>
-
         <!-- Start app top navbar -->
         <nav class="navbar navbar-expand-lg main-navbar">
             <form class="form-inline mr-auto">
                 <ul class="navbar-nav mr-3">
                     <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-                    <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
                 </ul>
-
             </form>
             <ul class="navbar-nav navbar-right">
-<!--                <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>-->
-<!--                    <div class="dropdown-menu dropdown-list dropdown-menu-right">-->
-<!--                        <div class="dropdown-header">Notifications-->
-<!--                            <div class="float-right">-->
-<!--                                <a href="#">Mark All As Read</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="dropdown-list-content dropdown-list-icons">-->
-<!--                            <a href="#" class="dropdown-item dropdown-item-unread">-->
-<!--                                <div class="dropdown-item-icon bg-primary text-white">-->
-<!--                                    <i class="fas fa-code"></i>-->
-<!--                                </div>-->
-<!--                                <div class="dropdown-item-desc"> Template update is available now!-->
-<!--                                    <div class="time text-primary">2 Min Ago</div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                            <a href="#" class="dropdown-item">-->
-<!--                                <div class="dropdown-item-icon bg-info text-white">-->
-<!--                                    <i class="far fa-user"></i>-->
-<!--                                </div>-->
-<!--                                <div class="dropdown-item-desc">-->
-<!--                                    <b>You</b> and <b>Dedik Sugiharto</b> are now friends-->
-<!--                                    <div class="time">10 Hours Ago</div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                            <a href="#" class="dropdown-item">-->
-<!--                                <div class="dropdown-item-icon bg-success text-white">-->
-<!--                                    <i class="fas fa-check"></i>-->
-<!--                                </div>-->
-<!--                                <div class="dropdown-item-desc">-->
-<!--                                    <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>-->
-<!--                                    <div class="time">12 Hours Ago</div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                            <a href="#" class="dropdown-item">-->
-<!--                                <div class="dropdown-item-icon bg-danger text-white">-->
-<!--                                    <i class="fas fa-exclamation-triangle"></i>-->
-<!--                                </div>-->
-<!--                                <div class="dropdown-item-desc">-->
-<!--                                    Low disk space. Let's clean it!-->
-<!--                                    <div class="time">17 Hours Ago</div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                            <a href="#" class="dropdown-item">-->
-<!--                                <div class="dropdown-item-icon bg-info text-white">-->
-<!--                                    <i class="fas fa-bell"></i>-->
-<!--                                </div>-->
-<!--                                <div class="dropdown-item-desc">-->
-<!--                                    Welcome to CodiePie template!-->
-<!--                                    <div class="time">Yesterday</div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                        </div>-->
-<!--                        <div class="dropdown-footer text-center">-->
-<!--                            <a href="#">View All <i class="fas fa-chevron-right"></i></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </li>-->
-<!--                <li class="dropdown">-->
-<!--                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">-->
-<!--                        <div class="d-sm-none d-lg-inline-block">Hi, <span th:text="${username}"></span></div></a>-->
-<!--                    <div class="dropdown-menu dropdown-menu-right">-->
-<!--                        <a href="features-settings.html" class="dropdown-item has-icon"><i class="fas fa-cog"></i> Settings</a>-->
-<!--                        <div class="dropdown-divider"></div>-->
-<!--                        <form action="/logout" method="post">-->
-<!--                        <button  type="submit" class="dropdown-item has-icon text-danger">-->
-<!--&lt;!&ndash;                            <input type="submit" value="Wyloguj" />&ndash;&gt;-->
-<!--                           <i class="fas fa-sign-out-alt"></i> Logout</button>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                </li>-->
-                <form action="/logout" method="post">
-                    <button  type="submit" class="dropdown-item has-icon text-danger">
-                        <i class="fas fa-sign-out-alt"></i>Logout</button>
-                </form>
+                <li>
+                    <form action="/logout" method="post">
+                        <button  type="submit" class="btn has-icon text-danger">
+                            <i class="fas fa-sign-out-alt"></i>Logout</button>
+                    </form>
+                </li>
             </ul>
         </nav>
 
@@ -129,77 +52,56 @@
         <div class="main-sidebar sidebar-style-3">
             <aside id="sidebar-wrapper">
                 <div class="sidebar-brand">
-                    <a href="index-2.html">CodiePie</a>
+                    <a href="/">System Oceniania</a>
                 </div>
                 <div class="sidebar-brand sidebar-brand-sm">
-                    <a href="index-2.html">CP</a>
+                    <a href="/">SO</a>
                 </div>
                 <ul class="sidebar-menu">
-
                     <li class="menu-header">Ogólne</li>
-                    <li class="dropdown">
-                        <a href="student/oceny" class="nav-link " data-toggle="dropdown"><i class="fas fa-graduation-cap"></i> <span>Oceny</span></a>
+                    <li>
+                        <a href="/student/oceny" class="nav-link "><i class="fas fa-graduation-cap"></i><span>Oceny</span></a>
                     </li>
-                    <li class="">
+                    <li >
                         <a href="/student/list" class="nav-link " ><i class="fas fa-users"></i><span>Klasa</span></a>
                     </li>
-
-
                 </ul>
-                <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-                    <a href="https://getcodiepie.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split"><i class="fas fa-rocket"></i> Documentation</a>
-                </div>
+
             </aside>
         </div>
-
         <!-- Start app main Content -->
 
 
             <div class="main-content" style="min-height: 858px;">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Table</h1>
-                        <div class="section-header-breadcrumb">
-                            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                            <div class="breadcrumb-item"><a href="#">Components</a></div>
-                            <div class="breadcrumb-item">Table</div>
-                        </div>
+                        <h1>Moja klasa</h1>
                     </div>
 
                     <div class="section-body">
-                        <h2 class="section-title">Table</h2>
-                        <p class="section-lead">Example of some Bootstrap table components.</p>
-
                         <div class="row">
-
-                            <div class="col-12 col-md-6 col-lg-6">
+                            <div class="col-12">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h4>Full Width</h4>
-                                    </div>
-                                    <div class="card-body p-0">
+                                    <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table table-striped table-md v_center">
-                                                <tbody><tr>
+                                            <table class="table table-striped v_center">
+                                                <tbody>
+                                                <tr>
                                                     <th>Imię</th>
                                                     <th>Nazwisko</th>
                                                 </tr>
                                                 <tr th:each="student : ${students}">
                                                     <td th:text="${student.firstName}"></td>
                                                     <td th:text="${student.lastName}"></td>
-<!--                                                    <td><div class="badge badge-success">Active</div></td>-->
-<!--                                                    <td><a href="#" class="btn btn-secondary">Detail</a></td>-->
                                                 </tr>
-
-                                                </tbody></table>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </section>
             </div>
@@ -214,11 +116,6 @@
 
 
 <!-- JS Libraies -->
-<script type="text/javascript" th:src="@{/assets/modules/jquery.sparkline.min.js}"></script>
-<script type="text/javascript" th:src="@{/assets/modules/chart.min.js}"></script>
-<script type="text/javascript" th:src="@{/assets/modules/owlcarousel2/dist/owl.carousel.min.js}"></script>
-<script type="text/javascript" th:src="@{/assets/modules/summernote/summernote-bs4.js}"></script>
-<script type="text/javascript" th:src="@{/assets/modules/chocolat/dist/js/jquery.chocolat.min.js}"></script>
 
 
 <!-- Page Specific JS File -->

@@ -12,8 +12,11 @@ import pl.patrykkania.gradingsystem.service.GradeService;
 import pl.patrykkania.gradingsystem.service.StudentService;
 import pl.patrykkania.gradingsystem.service.SubjectService;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class StudentController {
@@ -27,7 +30,50 @@ public class StudentController {
     @Autowired
     private SubjectService subjectService;
     @GetMapping("/student")
-    String Home() {
+    String Home(ModelMap model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName();
+        Optional<Student> studentOptional = studentService.getStudentByEmail(userEmail);
+        if (studentOptional.isPresent()) {
+            StudentClass studentClass = studentOptional.get().getClassName();
+            Long studentClassId = studentClass.getId();
+            List<Grade> grades = gradeService.getGradesByStudentId(studentOptional.get().getId());
+            List<Grade> latestGrades = grades.stream()
+                    .sorted(Comparator.comparing(Grade::getDate).reversed())
+                    .limit(3)
+                    .collect(Collectors.toList());
+            List<Subject> subjects = subjectService.getSubjectsByClassId(studentClassId);
+            Map<String, Double> averageGrades = calculateAverageGrades(grades);
+            Optional<Map.Entry<String, Double>> bestSubjectEntry = averageGrades.entrySet()
+                    .stream()
+                    .max(Comparator.comparing(Map.Entry::getValue));
+            Optional<Map.Entry<String, Double>> worstSubjectEntry = averageGrades.entrySet()
+                    .stream()
+                    .min(Comparator.comparing(Map.Entry::getValue));
+            if (bestSubjectEntry.isPresent()) {
+                String bestSubjectName = bestSubjectEntry.get().getKey();
+                Double bestSubjectAverage = bestSubjectEntry.get().getValue();
+                Map<String, String> bestSubjectMap = Map.of(bestSubjectName, bestSubjectAverage.toString());
+                model.addAttribute("bestSubject", bestSubjectMap);
+            } else {
+                model.addAttribute("bestSubject", Map.of("-", "-")); // Domyślne wartości, gdy brak ocen
+            }
+            if (worstSubjectEntry.isPresent()) {
+                String worstSubjectName = worstSubjectEntry.get().getKey();
+                Double worstSubjectAverage = worstSubjectEntry.get().getValue();
+                Map<String, String> worstSubjectMap = Map.of(worstSubjectName, worstSubjectAverage.toString());
+                model.addAttribute("worstSubject", worstSubjectMap);
+            } else {
+                model.addAttribute("worstSubject", Map.of("-", "-")); // Domyślne wartości, gdy brak ocen
+            }
+
+
+
+            model.addAttribute("latestGrades",latestGrades);
+
+
+        }
 
         return "student/student";
     }
@@ -51,17 +97,23 @@ public class StudentController {
             Long studentClassId = studentClass.getId();
             List<Subject> subjects = subjectService.getSubjectsByClassId(studentClassId);
             List<Grade> grades = gradeService.getGradesByStudentId(studentOptional.get().getId());
-
-
+            Map<String, Double> averageGrades = calculateAverageGrades(grades);
+            model.addAttribute("averages",averageGrades);
             //List<Subject> subjects = subjectService.getSubjectsByStudentClass(studentClass);
             model.addAttribute("subjects",subjects);
             model.addAttribute("grades",grades);
-            // Teraz możesz używać studentId do czegoś, co chcesz zrobić z identyfikatorem studenta
+
         }
 
 
 
         return "student/student-grade";
+    }
+
+    public static Map<String, Double> calculateAverageGrades(List<Grade> grades) {
+        return grades.stream()
+                .collect(Collectors.groupingBy(grade -> grade.getSubject().getSubjectName(),
+                        Collectors.averagingInt(Grade::getGrade)));
     }
 
 

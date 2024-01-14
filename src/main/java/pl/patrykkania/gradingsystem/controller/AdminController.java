@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.patrykkania.gradingsystem.model.Student;
 import pl.patrykkania.gradingsystem.model.StudentClass;
 import pl.patrykkania.gradingsystem.model.Subject;
@@ -37,7 +38,7 @@ public class AdminController {
 
     @GetMapping("/admin")
     String Home() {
-        return "home";
+        return "/admin/admin";
     }
 
 
@@ -58,34 +59,36 @@ public class AdminController {
     }
 
     @PostMapping("admin/add-student")
-    public void addStudent(@ModelAttribute Student student, ModelMap model, @RequestParam("studentClass.id") Long studentClassId) {
+    public String addStudent(@ModelAttribute Student student, RedirectAttributes model, @RequestParam("studentClass.id") Long studentClassId) {
         try {
             StudentClass studentClass = studentClassService.getClassById(studentClassId);
             student.setStudentClass(studentClass);
             studentService.save(student);
-            model.addAttribute("message", "Student został pomyślnie dodany");
+            model.addFlashAttribute("message", "Student został pomyślnie dodany");
         } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage());
+            model.addFlashAttribute("error", e.getMessage());
         } catch (Exception e) {
-            model.addAttribute("error", "Wystąpił nieoczekiwany błąd.");
+            model.addFlashAttribute("error", "Wystąpił nieoczekiwany błąd.");
         }
 
 
 
-//        return "redirect:/admin/add-student";
+        return "redirect:/admin/add-student";
 
     }
 
     @PostMapping("admin/add-teacher")
-    public void addTeacher(@ModelAttribute Teacher teacher, ModelMap model) {
+    public String addTeacher(@ModelAttribute Teacher teacher, RedirectAttributes model) {
         try {
             teacherService.save(teacher);
-            model.addAttribute("message", "Nauczyciel został pomyślnie dodany");
+            model.addFlashAttribute("message", "Nauczyciel został dodany pomyślnie!");
         } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage());
+            model.addFlashAttribute("error", e.getMessage());
         } catch (Exception e) {
-            model.addAttribute("error", "Wystąpił nieoczekiwany błąd.");
+            model.addFlashAttribute("error", "Wystąpił nieoczekiwany błąd.");
         }
+
+        return "redirect:/admin/add-teacher";
     }
 
 
@@ -105,7 +108,7 @@ public class AdminController {
     }
 
     @PostMapping("admin/add-subject")
-    public void addStudent(@ModelAttribute Subject subject, ModelMap model, @RequestParam("studentClass.id") Long studentClassId,@RequestParam("teacher") Long teacherId) {
+    public String addStudent(@ModelAttribute Subject subject, RedirectAttributes model, @RequestParam("studentClass.id") Long studentClassId,@RequestParam("teacher") Long teacherId) {
         StudentClass studentClass;
         try {
             studentClass = studentClassService.getClassById(studentClassId);
@@ -114,12 +117,14 @@ public class AdminController {
             subject.setTeacher(teacher);
 
             subjectService.save(subject);
-            model.addAttribute("message", "Przedmiot został pomyślnie dodany");
+            model.addFlashAttribute("message", "Przedmiot został pomyślnie dodany");
         } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage());
+            model.addFlashAttribute("error", e.getMessage());
         } catch (Exception e) {
-            model.addAttribute("error", "Wystąpił nieoczekiwany błąd.");
+            model.addFlashAttribute("error", "Wystąpił nieoczekiwany błąd.");
         }
+
+        return "redirect:/admin/add-subject";
     }
 
     //Klasy
@@ -131,16 +136,17 @@ public class AdminController {
     }
 
     @PostMapping("/admin/add-class")
-    public String addClass(@ModelAttribute StudentClass studentClass, ModelMap model) {
-        try {
+    public String addClass(@ModelAttribute StudentClass studentClass, RedirectAttributes model) {
+
+        Long studentClassId = studentClassService.getClassByName(studentClass.getName());
+        if(studentClassId == null) {
             studentClassService.saveClass(studentClass);
-            model.addAttribute("message", "Klasa została pomyślnie dodana");
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage());
-        } catch (Exception e) {
-            model.addAttribute("error", "Wystąpił nieoczekiwany błąd.");
+            model.addFlashAttribute("message", "Klasa została dodana pomyślnie!");
         }
-    return "admin/add-class";
+        else {
+            model.addFlashAttribute("error", "Klasa o podaniej nazwie już istnieje!");
+        }
+        return "redirect:/admin/add-class";
     }
 
 

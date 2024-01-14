@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Dodaj przedmiot</title>
+    <title>Panel</title>
 
     <!-- General CSS Files -->
     <link th:href="@{/assets/modules/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
@@ -79,42 +79,10 @@
         <div class="main-content">
             <section class="section">
                 <div class="section-header">
-                    <h1>Dodaj przedmiot</h1>
-                </div>
-                <div th:if="${error}" class="alert alert-danger">
-                    <p th:text="${error}"></p>
-                </div>
-
-                <div th:if="${message}" class="alert alert-success">
-                    <p th:text="${message}"></p>
+                    <h1>Home</h1>
                 </div>
                 <div class="section-body">
                     <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-<form action="/admin/add-subject" method="post" id="subjectForm">
-    <div class="form-group">
-    <label for="subjectName">Przedmiot:</label>
-    <input type="text" id="subjectName" name="subjectName" class="form-control">
-    </div>
-    <div class="form-group">
-    <label for="studentClass">Wybierz klase</label>
-    <select id="studentClass" name="studentClass.id" class="form-control">
-        <option th:each="studentClass : ${availableClasses}" th:value="${studentClass.id}" th:text="${studentClass.name}"></option>
-    </select>
-    </div>
-    <div class="form-group">
-    <select id="teacher" name="teacher" class="form-control">
-        <option th:each="teacher : ${availableTeachers}" th:value="${teacher.id}" th:text="${teacher.firstName}+' '+${teacher.lastName}"></option>
-    </select>
-    </div>
-    <button onclick="validateForm()" type="button" class="btn btn-primary">Dodaj przedmiot</button>
-    <div id="formValid" class="text-danger py-4 d-none">Uzupełnij wszystkie pola</div>
-</form>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -130,28 +98,8 @@
 <script type="text/javascript" th:src="@{/js/page/index.js}"></script>
 
 <!-- Template JS File -->
-<script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+<script type="text/javascript" th:src="@{js/scripts.js}"></script>
 <script type="text/javascript" th:src="@{/js/custom.js}"></script>
-
-<script th:inline="javascript">
-    function validateForm(){
-        var form = $("#subjectForm");
-        var elements = $("#subjectForm input, #subjectForm select");
-        var valid = true;
-        elements.each(function() {
-            if ($(this).val() === "") {
-                valid = false;
-                return false;
-            }
-        });
-
-        if (!valid) {
-            $('#formValid').removeClass("d-none");
-        }else {
-            form.submit();
-        }
-    }
-</script>
 </body>
 
 

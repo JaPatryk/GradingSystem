@@ -48,4 +48,8 @@ public class UserService implements UserDetailsService {
         authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
         return authorities;
     }
+
+    public Optional<User> getUserByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
 }

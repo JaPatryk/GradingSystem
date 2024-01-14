@@ -1,22 +1,25 @@
 package pl.patrykkania.gradingsystem.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.patrykkania.gradingsystem.model.User;
 import pl.patrykkania.gradingsystem.service.UserService;
 
 import java.util.Optional;
 
-
 @Controller
-public class HomeController {
+public class CustomErrorController implements ErrorController {
+
     @Autowired
-    private UserService userService;
-    @GetMapping("/")
-    public String handleRequest() {
+    UserService userService;
+
+    @RequestMapping("/error")
+    public String handleError() {
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if ((authentication.isAuthenticated())) {
             authentication.getName();
@@ -33,7 +36,8 @@ public class HomeController {
 
             }
         }
-            return "redirect:/login";
-
+        return "redirect:/login";
     }
+
+
 }
