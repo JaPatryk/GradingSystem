@@ -33,7 +33,6 @@ public class UserService implements UserDetailsService {
 
         List<GrantedAuthority> authorities = getAuthorities(user.getRoles());
 
-//        logger.info("Loading user by username. Username: {}, Roles: {}", email, authorities);
 
         return new org.springframework.security.core.userdetails.User(
                 email,
@@ -42,7 +41,6 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    // Method to map roles represented as strings to SimpleGrantedAuthority
     private List<GrantedAuthority> getAuthorities(int role) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + role));

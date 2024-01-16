@@ -10,9 +10,8 @@ import java.util.Optional;
 
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
 
-List<Subject> findByTeacherId(Long teacherId);
+    List<Subject> findByTeacherId(Long teacherId);
 
-//    List<Subject> findByStudentClassId(Long id);
     List<Subject> findByStudentClassIdAndTeacherId(Long studentClassId, Long teacherId);
 
     List<Subject> findByStudentClass_Id(Long classId);

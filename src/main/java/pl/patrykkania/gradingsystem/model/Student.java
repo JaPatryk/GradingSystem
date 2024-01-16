@@ -8,7 +8,6 @@ public class Student extends User {
     private String lastName;
 
     @ManyToOne
-//    @JoinColumn(name = "class")
     private StudentClass studentClass;
     @Column(unique = true)
     private String pesel;
